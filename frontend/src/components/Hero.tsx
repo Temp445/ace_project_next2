@@ -7,7 +7,8 @@ import logo from '../assets/AceLogo.png';
 import img2 from '../assets/AP2.jpg';
 import img3 from '../assets/AP3.jpg';
 // import img4 from '../assets/AP4.jpg';
-import img5 from '../assets/demo1.jpg';
+// import img5 from '../assets/demo1.jpg';
+import img4 from '../assets/img-3.jpg'
 
 import { BsMicrosoftTeams } from "react-icons/bs";
 import { LuChartGantt } from "react-icons/lu";
@@ -29,7 +30,7 @@ const Hero = () => {
 
           <div className="md:hidden flex gap-1 mx-auto justify-center w-fit py-4 px-6 md:mt-10  -mt-16 ">
             <Image src={logo} alt="logo" className="w-8 h-8 " width={32} height={32}  />
-            <span className="text-lg font-bold text-[#2b2d42] tracking-wide mt-1">ACE Projects</span>
+            <span className="text-lg font-bold text-[#2b2d42] tracking-wide mt-1">AceProject</span>
           </div>
 
           <section className="flex flex-col lg:flex-row items-center mx-auto justify-evenly  min-h-fit 2xl:pb-10  md:gap-12 lg:gap-8">
@@ -38,9 +39,9 @@ const Hero = () => {
                 <div className="absolute -inset-8  rounded-3xl blur-2xl" />
 <div className="flex flex-col gap-6">
 
-  <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6 ">
+  <div className="md:grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6 ">
 
-    <div className="lg:col-span-1  md:block">
+    <div className="lg:col-span-1 hidden  md:block">
       <div className="relative h-full bg-white/10 rounded md:rounded-xl border border-white/20 p-2 md:p-4 shadow-2xl backdrop-blur-sm">
         <Image
           src={img2}
@@ -54,7 +55,7 @@ const Hero = () => {
     </div>
 
 
-    <div className="lg:col-span-2 grid grid-rows-2 gap-2">
+    <div className="lg:col-span-2 md:grid grid-rows-2 gap-2">
 
       <div className="relative bg-white/10 rounded md:rounded-2xl border border-white/20 p-2 md:p-4 shadow-2xl backdrop-blur-sm">
         <Image
@@ -67,12 +68,12 @@ const Hero = () => {
       </div>
 
 
-      <div className="grid  gap-1 md:gap-4">
+      <div className="md:grid  gap-1 md:gap-4 hidden">
         <div className="relative bg-white/10 rounded md:rounded-2xl border border-white/20 p-2 md:p-4 shadow-2xl backdrop-blur-sm">
           <Image
-            src={img5}
+            src={img4}
             alt="image"
-            className="w-full h-full object-cover rounded-lg shadow-lg"
+            className="w-full h-80 object-center rounded-lg shadow-lg"
             width={542}
             height={294}
           />

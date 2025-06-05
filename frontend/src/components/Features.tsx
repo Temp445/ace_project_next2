@@ -69,7 +69,7 @@ const Features = () => {
             What We Offer
           </h2>
           <p className="md:text-lg text-slate-700 max-w-5xl mx-auto text-justify md:text-center">
-           ACE Projects helps your team plan smarter, collaborate seamlessly, and deliver on time with intuitive task management, real-time tracking, and streamlined communication—boosting productivity for projects of any size.
+           AceProject helps your team plan smarter, collaborate seamlessly, and deliver on time with intuitive task management, real-time tracking, and streamlined communication—boosting productivity for projects of any size.
           </p>
         </div>
 

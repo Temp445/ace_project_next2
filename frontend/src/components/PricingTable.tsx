@@ -33,14 +33,17 @@ interface FeatureIconProps {
 const PricingTable: React.FC = () => {
   const features: Feature[] = [
     { name: ' Create & manage multiple projects', Essential: true, EssentialNote: '', BasicPlus: true, BasicPlusNote: '', premium: true, premiumNote: '' },
-    { name: 'Task assignment & status tracking', Essential: false, BasicPlus: true, premium: true },
+    { name: 'Task assignment & status tracking', Essential: true, BasicPlus: true, premium: true },
     { name: 'Basic team member management', Essential: true, EssentialNote: 'up to 5 users', BasicPlus: true, BasicPlusNote: 'Up to 20 users', premium: true, premiumNote: 'Unlimited' },
     { name: 'Role-based access', Essential: true, EssentialNote: '', BasicPlus: true, BasicPlusNote: '', premium: true },
     { name: 'Calendar View ', Essential: true, EssentialNote: 'Day & Week only', BasicPlus: true, BasicPlusNote: 'Day, Week, Month', premium: true , premiumNote: 'Day, Week, Month'},
     { name: 'Gantt Chart', Essential: true, BasicPlus: true, premium: true },
     { name: 'Performance Tracking & Star Player', Essential: false, BasicPlus: true, premium: true },
     { name: 'Reports & Insights', Essential: false, BasicPlus: false, premium: true },
-    { name: ' Exportable reports', Essential: false, BasicPlus: true, premium: true },
+    { name: ' Exportable reports', Essential: true, BasicPlus: true, premium: true },
+    { name: 'Project templates', Essential: false, BasicPlus: true, premium: true },
+    { name: 'Time tracking / Timesheets', Essential: false, BasicPlus: false, premium: true },
+    { name: 'Custom fields / Custom forms', Essential: false, BasicPlus: false, premium: true },
   ];
 
   const plans: Plan[] = [
@@ -49,7 +52,7 @@ const PricingTable: React.FC = () => {
       desc: 'For small teams just getting started with project management.',
       buttonText: 'Subscribe Now',
       buttonlink: '#contact',
-      buttonClass: 'bg-none border text-black hover:bg-sky-600 hover:text-white',
+      buttonClass: 'bg-none border text-black hover:bg-teal-600 hover:text-white',
       highlighted: false,
       tag: '',
     },
@@ -58,7 +61,7 @@ const PricingTable: React.FC = () => {
       desc: 'For growing teams needing better visibility and coordination.',
       buttonText: 'Subscribe Now',
       buttonlink: '#contact',
-      buttonClass: 'bg-none border text-black hover:bg-sky-600 hover:text-white',
+      buttonClass: 'bg-none border text-black hover:bg-teal-600 hover:text-white',
       highlighted: true,
       tag: 'Smart Choice',
     },
@@ -67,7 +70,7 @@ const PricingTable: React.FC = () => {
       desc: 'For organizations looking for advanced tracking, analytics, and scaling.',
       buttonText: 'Subscribe Now',
       buttonlink: '#contact',
-      buttonClass: 'bg-none border text-black hover:bg-sky-600 hover:text-white',
+      buttonClass: 'bg-none border text-black hover:bg-teal-600 hover:text-white',
       highlighted: false,
       tag: '',
     },

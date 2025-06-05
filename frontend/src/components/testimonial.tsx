@@ -13,21 +13,21 @@ const testimonials = [
     logo:icon1,
     name: 'Praveena',
     company: 'Asahi India Glass Ltd',
-    quote: 'Our company values the precision and reliability of this calibration system, which is essential to maintaining our quality standards.',
+    quote: 'Managing multiple projects used to be overwhelming. With this tool, I can quickly see what’s on track and where we’re falling behind. I especially love the Gantt charts and daily task notifications. It’s like having a personal assistant for my team!',
   },
   {
     id: 2,
     logo:icon2,
     name: 'Arun',
     company: 'Wonjin Autoparts India Pvt Ltd',
-    quote: 'Implementing this system has substantially reduced the time and errors associated with our calibration procedures, contributing to smoother daily operations.',
+    quote: 'Our marketing campaigns are now more organized than ever. We can set deadlines, assign tasks, and track everything from one place. The collaboration tools have reduced our internal emails by half and saved so much time!',
   },
   {
     id: 3,
     logo:icon3,
     name: 'Vijaya Prakash',
     company: 'RANE TRW STEERING SYSTEMS Pvt Ltd',
-    quote: 'Since implementing this solution, our calibration workflows have become markedly more efficient. The system’s reliability and ease of use have exceeded our expectations.',
+    quote: 'Since we started using this platform, our client communication and internal workflow have improved dramatically. I can assign tasks, monitor status, and keep clients updated in real time. It’s reduced confusion and increased our delivery speed.',
   }
 ];
 
@@ -89,8 +89,8 @@ export default function TestimonialCarousel() {
             </p>
             <div>
               <h3 className="text-base md:text-xl font-semibold text-gray-900">{name}</h3>
-             <p className="text-gray-500 text-xs md:text-base flex items-center gap-3 mx-auto justify-center">
-    <span className="shrink-0">
+             <p className="text-gray-500 text-xs md:text-base items-center gap-3 mx-auto justify-center hidden">
+    <span className="shrink-0 ">
       <Image src={logo} alt="Logo" width={80} height={80} className="rounded-md object-contain w-12 h-12 md:w-20 md:h-20" />
     </span> {company} </p>
 

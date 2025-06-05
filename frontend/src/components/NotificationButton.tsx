@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ const NotificationButton = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShouldShow(true);
-    }, 40000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -32,28 +32,34 @@ const NotificationButton = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [shouldShow]);
 
+  const handleClose = () => {
+    setIsClosed(true);
+    setTimeout(() => {
+      setIsClosed(false);
+    }, 10000); 
+  };
+
   if (!shouldShow || isClosed) return null;
 
   return (
-    <div className="fixed top-[50%] left-0 z-[200]">
-      <div className="group flex items-center bg-blue-600 text-white py-2 px-2 rounded-e-lg shadow-lg space-x-2">
-        <button
-          onClick={() => setIsClosed(true)}
-          className="text-white hover:text-red-300 text-lg font-bold"
-          aria-label="Close notification"
-        >
-          <AiOutlineCloseCircle />
-        </button>
-
+    <div className="fixed top-[50%] right-0 z-[200]">
+      <div className="group flex items-center bg-orange-600 text-white py-2 px-2 rounded-l-lg shadow-lg space-x-2 relative">
         <Link
           href="#contact"
           className="bg-white text-black rounded px-3 py-1 text-sm font-semibold flex items-center gap-1"
         >
           BOOK A DEMO <FaCalendarDays className="animate-bounce" />
         </Link>
+        <button
+          onClick={handleClose}
+          className="text-white hover:text-red-300 text-lg font-bold"
+          aria-label="Close notification"
+        >
+          <AiOutlineCloseCircle />
+        </button>
 
-        <div className="hidden group-hover:block absolute top-full left-2 -mt-32 w-72 bg-white border shadow-2xl text-black text-xs p-2 rounded ">
-         Take a quick tour of ACE Projects and discover how it can simplify your project management. Click below to book a demo now.
+        <div className="hidden group-hover:block absolute top-full right-5 -mt-32 w-72 bg-white border shadow-2xl text-black text-xs p-2 rounded">
+          Take a quick tour of AceProject and discover how it can simplify your project management. Click below to book a demo now.
         </div>
       </div>
     </div>

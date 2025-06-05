@@ -32,7 +32,7 @@ const Navbar: FC = () => {
               height={100}
               className="w-12 h-12 md:w-10 md:h-10 lg:w-12 lg:h-12 "
             />
-            <span className="mt-2">ACE Projects </span>
+            <span className="mt-2">AceProject </span>
           </Link>
         </div>
 

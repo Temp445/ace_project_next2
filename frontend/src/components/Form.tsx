@@ -249,7 +249,7 @@ const Form: React.FC = () => {
 
             <div className="flex gap-2">
               <label className="lg:text-lg font-medium">Product Interested :</label>
-              <input type="text" name="product" defaultValue="ACE Projects" readOnly className="lg:text-lg font-semibold" />
+              <input type="text" name="product" defaultValue="AceProject" readOnly className="lg:text-lg font-semibold" />
             </div>
 
             <div className="flex flex-col">
@@ -274,7 +274,7 @@ const Form: React.FC = () => {
             <div className="absolute inset-0 bg-blue-50 bg-opacity-20 flex flex-col items-center justify-center">
               <Image fill src={icon} alt="bg" className="object-cover object-center opacity-50" />
               <div className="z-40 text-center">
-                <h1 className="text-[#2b2d42] font-bold">ACE Projects</h1>
+                <h1 className="text-[#2b2d42] font-bold">AceProject</h1>
                 <h3 className="text-2xl font-bold text-[#2b2d42]">Contact Information</h3>
               </div>
             </div>
@@ -309,7 +309,7 @@ const Form: React.FC = () => {
               <div>
                 <h4 className="font-semibold text-lg">Visit Us</h4>
                 <p className="mt-1 text-sm">
-                  #306, 2nd Floor NSIC - Software Technology Business Park<br />
+                  #306, 2nd Floor NSIC - Software Technology Business Park,
                   B 24, Guindy Industrial Estate, Ekkatuthangal, Chennai - 600032
                 </p>
               </div>

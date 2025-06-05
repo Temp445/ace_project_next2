@@ -1,7 +1,7 @@
 
 import { CheckCircle,MoveRight } from 'lucide-react'
 import Image from 'next/image'
-import AP6 from '../assets/demo3.png'
+import AP6 from '../assets/img-1.png'
 import Link from 'next/link'
 
 
@@ -49,15 +49,15 @@ const Why_Choose = () => {
         
           <div className="w-full xl:w-7/12 space-y-6  pt-5 pb-10 px-2 lg:px-12 xl:px-2 rounded">
             <div className="inline-block  text-[#2b2d42] border px-4 py-1 rounded-full font-medium">
-              Why ACE Projects ?
+              Why AceProject ?
             </div>
             
             <h2 className="text-xl  xl:text-2xl  2xl:text-4xl font-bold text-[#2b2d42] leading-tight">
-             Your team&rsquo;s success begins with ACE Projects
+             Your team&rsquo;s success begins with AceProject
             </h2>
             
             <p className="text-sm lg:text-lg text-[#31363F]">
-              ACE Projects is more than just a project management tool—it&rsquo;s a complete solution to help your team stay organized, productive, and on schedule.
+              AceProject is more than just a project management tool—it&rsquo;s a complete solution to help your team stay organized, productive, and on schedule.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">

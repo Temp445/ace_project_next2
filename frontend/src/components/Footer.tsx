@@ -9,9 +9,9 @@ const Footer = () => {
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between md:justify-around space-y-8 md:space-y-0">
 
-          <div className='w-80'>
-            <div className="text-lg font-semibold text-white flex gap-2"> <Image src={logo} alt="logo" width={100} height={100} className='w-6 h-6' /> ACE Projects</div>
-            <p className="mt-2 text-sm flex flex-wrap">ACE Projects is a project management platform that enhances efficiency with tools for task tracking, team collaboration, and project oversight. It features Gantt charts for visualizing timelines, performance analytics to assess team contributions, dashboards for real-time monitoring, and calendar views for managing deadlines and schedules.</p>
+          <div className='md:w-80 '>
+            <div className="text-lg font-semibold text-white flex gap-2"> <Image src={logo} alt="logo" width={100} height={100} className='w-6 h-6' /> AceProject</div>
+            <p className="mt-2 text-sm flex flex-wrap">AceProject is a project management platform that enhances efficiency with tools for task tracking, team collaboration, and project oversight. It features Gantt charts for visualizing timelines, performance analytics to assess team contributions, dashboards for real-time monitoring, and calendar views for managing deadlines and schedules.</p>
           </div>
 
         <div className='flex gap-14 xl:gap-28'>
