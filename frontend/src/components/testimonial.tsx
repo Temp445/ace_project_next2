@@ -104,7 +104,7 @@ export default function TestimonialCarousel() {
               key={index}
               onClick={() => setCurrentTestimonial(index)}
               className={`w-2 h-2 md:w-5 md:h-1 mx-1 rounded-full ${
-                index === currentTestimonial ? 'bg-blue-500' : 'bg-gray-300'
+                index === currentTestimonial ? 'bg-[#077A7D]' : 'bg-gray-300'
               }`}
             />
           ))}
