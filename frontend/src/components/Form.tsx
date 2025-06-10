@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { SendHorizontal, Mails, PhoneCall, MapPinned } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import Image from "next/image";
@@ -10,9 +10,10 @@ import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import 'react-phone-number-input/style.css';
 import icon from "../assets/CF.jpg";
 
-const service_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-const template_ID = process.env.NEXT_PUBLIC_EMAILJS_ENQ_TEMPLATE_ID;
+const service_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const template_ID = process.env.NEXT_PUBLIC_EMAILJS_ENQ_TEMPLATE_ID!;
 const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+const adminPhones = process.env.NEXT_PUBLIC_ADMIN_PHONES?.split(',').map((p) => p.trim()) || [];
 
 const Form: React.FC = () => {
   const form = useRef<HTMLFormElement | null>(null);
@@ -23,156 +24,108 @@ const Form: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
 
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  
-  const gmailTypos = [
-    'gamil.com', 'gnail.com', 'gmial.com', 'gmaill.com', 'gmail.con',
-    'gmail.co', 'gmail.om', 'gmail.cim', 'gmail.cm', 'gmai.com',
-    'gmail.comm', 'gmal.com', 'gmaul.com', 'gmail.xom', 'gmail.vom',
-    'g.mail.com', 'gmaik.com', 'gmaio.com', 'gmali.com', 'gmali.con',
-    'gmail.clm', 'gmail.coom', 'gmaiil.com', 'ggmail.com', 'gemail.com',
-    'gmmail.com', 'gmiall.com', 'gmsil.com', 'gmale.com', 'gmall.com',
-    'gmil.com', 'gmailc.om', 'gmailc.com', 'gmailm.com', 'gmali.cm',
-    'gmalil.com', 'gmial.cm', 'gmaol.com', 'gmauk.com', 'gmaul.co',
-    'gmail.ckm', 'gmail.kom', 'gmail.bom', 'gmail.dcom', 'gmaul.con',
-    'mail.com', 'email.com', 'gmil.com', 'email.co'
-  ];
+  const validateEmail = async (email: string): Promise<string> => {
+    try {
+      const response = await fetch('/api/proxy-validate-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
 
-  const validateEmail = (email: string): string => {
-    if (!emailPattern.test(email)) {
-      return 'Please enter a valid email address.';
+      if (!response.ok) return 'Please enter a valid email address.';
+
+      const result = await response.json();
+      return result.isValid ? '' : 'Please enter a valid email address.';
+    } catch (err) {
+      console.error('Email validation error:', err);
+      return 'Email validation service unavailable.';
     }
-
-    const domain = email.split('@')[1]?.toLowerCase();
-    if (gmailTypos.includes(domain)) {
-      return 'Did you mean "gmail.com"?';
-    }
-
-    return '';
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const emailInput = e.target.value.trim();
     setEmail(emailInput);
-
-    if (!emailPattern.test(emailInput)) {
-      setEmailError('Please enter a valid email address.');
-      return;
-    }
-
-    const domain = emailInput.split('@')[1]?.toLowerCase();
-
-    if (gmailTypos.includes(domain)) {
-      setEmailError('Did you mean "gmail.com"?');
-      return;
-    }
-
-    setEmailError('');
+    const error = await validateEmail(emailInput);
+    setEmailError(error);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
     const formCurrent = form.current;
-    if (!formCurrent) {
-      console.error("Form reference is null.");
-      return;
-    }
+    if (!formCurrent) return;
 
-    const emailValidationMessage = validateEmail(email);
+    const emailValidationMessage = await validateEmail(email);
     if (emailValidationMessage) {
       setEmailError(emailValidationMessage);
       return;
     } else {
-      setEmailError("");
+      setEmailError('');
     }
 
     if (!phone || !isValidPhoneNumber(phone)) {
-      setPhoneError("Please enter a valid phone number.");
-      
+      setPhoneError('Please enter a valid phone number.');
       return;
     } else {
-      setPhoneError("");
-    }
-
-    if (!formCurrent.checkValidity()) {
-
-      return;
-    }
-
-   
-    setLoading(true);
+      setPhoneError('');
+    }  
 
     const formData = {
       name: (formCurrent['Name'] as HTMLInputElement)?.value || '',
-      company: (formCurrent['company'] as HTMLInputElement)?.value || '',
-      email: email,
+      company: formCurrent['company']?.value || '',
+      email,
       number: phone,
-      location: (formCurrent['location'] as HTMLInputElement)?.value || '',
-      queries: (formCurrent['queries'] as HTMLTextAreaElement)?.value || '',
-      product: (formCurrent['product'] as HTMLInputElement)?.value || '',
+      location: formCurrent['location']?.value || '',
+      queries: formCurrent['queries']?.value || '',
+      product: formCurrent['product']?.value || '',
     };
 
-    emailjs.send(service_ID!, template_ID!, formData, publicKey)
-      .then(
-        (response) => {
-          console.log("Email sent successfully!", response);
-          alert("Your message has been sent successfully!");
-          formCurrent.reset();
-          
-          setEmail('');
-          setPhone('');
+    setLoading(true);
+
+    try {
+      await emailjs.send(service_ID, template_ID, formData, publicKey);
+      alert('Your message has been sent successfully!');
+      formCurrent.reset();
+      setEmail('');
+      setPhone('');
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      alert('There was an issue sending your message. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+
+    const phoneWithoutPlus = phone.replace(/^\+/, '');
+ 
+    try {
+      await sendWhatsappMessage(
+        'enquiry_ace_project',
+        {
+          fullName: formData.name,
+          companyName: formData.company,
+          businessEmail: formData.email,
+          mobileNumber: phoneWithoutPlus,
+          location: formData.location,
+          message: formData.queries,
         },
-        (error) => {
-          console.error("Email sending failed:", error);
-          alert("There was an issue sending your message. Please try again later.");
-        }
-      )
-      .finally(() => setLoading(false));
+        adminPhones,
+      );
 
-    const rawNumbers = process.env.NEXT_PUBLIC_ADMIN_PHONES;
-    const phoneNumbers = rawNumbers?.split(',').map(num => num.trim()) ?? [];
-
-    // const phoneWithoutPlus = phone.replace(/^\+/, '');
-
-    // Whatsapp message generation
-    sendWhatsappMessage(
-      "enquiry_ace_project",
-      {
-        fullName: formData.name,
-        companyName: formData.company,
-        businessEmail: formData.email,
-        mobileNumber: formData.number,
-        location: formData.location,
-        message: formData.queries,
-      },
-      phoneNumbers,
-    ).then(() => {
-      console.log("WhatsApp message sent successfully!");
-    }).catch((error) => {
-      console.error("Failed to send WhatsApp message:", error);
-    });
-
-    // Whatsapp greeting message
-    if (!formData.number) {
-      console.warn("Mobile number is required for WhatsApp greeting message.");
-    } else {
-      sendWhatsappMessage(
-        "customer_greetings",
+      await sendWhatsappMessage(
+        'customer_greetings',
         {
           fullName: formData.name,
           product: formData.product,
           siteUrl: 'https://acesoft.in',
-          imageUrl: 'https://res.cloudinary.com/dohyevc59/image/upload/v1749124753/Enquiry_Greetings_royzcm.jpg',
+          imageUrl:
+            'https://res.cloudinary.com/dohyevc59/image/upload/v1749124753/Enquiry_Greetings_royzcm.jpg',
         },
-        [formData.number]
-      ).then(() => {
-        console.log("WhatsApp greeting message sent successfully!");
-      }).catch((error) => {
-        console.error("Failed to send WhatsApp greeting message:", error);
-      });
-    };
+        [phoneWithoutPlus],
+      );
+    } catch (error) {
+      console.error('WhatsApp sending error:', error);
+    }
   };
 
   return (
