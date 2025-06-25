@@ -9,6 +9,8 @@ import { sendWhatsappMessage } from "../services/whatsapp/whatsappService";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import 'react-phone-number-input/style.css';
 import icon from "../assets/CF.jpg";
+import { useTranslations } from "next-intl";
+import { CountryCode } from 'libphonenumber-js';
 
 const service_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
 const template_ID = process.env.NEXT_PUBLIC_EMAILJS_ENQ_TEMPLATE_ID!;
@@ -16,6 +18,8 @@ const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 const adminPhones = process.env.NEXT_PUBLIC_ADMIN_PHONES?.split(',').map((p) => p.trim()) || [];
 
 const Form: React.FC = () => {
+    const t = useTranslations('Contact');
+  const countryCode = t('code') as CountryCode || 'IN';
   const form = useRef<HTMLFormElement | null>(null);
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState<string>("");
@@ -134,29 +138,29 @@ const Form: React.FC = () => {
 
         <div className="md:w-7/12 border p-5 md:p-10 rounded md:rounded-none md:border-[#2b2d42]">
           <h2 className="text-xl md:text-3xl font-semibold text-[#2b2d42] mb-6">
-            Get in touch and <strong className="text-[#077A7D]">schedule your demo now!</strong>
+          {t('Title')}   <strong className="text-[#077A7D]">{t('highlight')}</strong>
           </h2>
-          <form ref={form} onSubmit={handleSubmit} className="space-y-4" noValidate>
+          <form ref={form} onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex flex-col">
-                <label className="lg:text-lg font-medium">Name :</label>
-                <input type="text" name="Name" required placeholder="Name *" className="text-sm md:text-[16px] border p-2 mt-1 rounded w-full" />
+                <label className="lg:text-lg font-medium">{t('Form.Name')} :</label>
+                <input type="text" name="Name" required placeholder={`${t('Form.Name')} *`} className="text-sm md:text-[16px] border p-2 mt-1 rounded w-full" />
               </div>
               <div className="flex flex-col">
-                <label className="lg:text-lg font-medium">Company Name :</label>
-                <input type="text" name="company" required placeholder="Company Name *" className="text-sm md:text-[16px] border p-2 mt-1 rounded w-full" />
+                <label className="lg:text-lg font-medium">{t('Form.Company')}  :</label>
+                <input type="text" name="company" required placeholder={`${t('Form.Company')} *`} className="text-sm md:text-[16px] border p-2 mt-1 rounded w-full" />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex flex-col">
-                <label className="lg:text-lg font-medium">Business Email :</label>
+                <label className="lg:text-lg font-medium">{t('Form.Email')} :</label>
                 <input
                   type="email"
                   name="email"
                   value={email}
                   required
-                  placeholder="Email *"
+                  placeholder={`${t('Form.Email')} *`}
                   onChange={handleEmailChange}
                   className="text-sm md:text-[16px] border p-2 mt-1 rounded w-full"
                 />
@@ -166,10 +170,10 @@ const Form: React.FC = () => {
               </div>
 
               <div className="flex flex-col">
-                <label className="lg:text-lg font-medium">Mobile Number :</label>
+                <label className="lg:text-lg font-medium">{t('Form.Phone')} :</label>
                 <PhoneInput
                   international
-                  defaultCountry="IN"
+                  defaultCountry={countryCode}
                   value={phone}
                   onChange={setPhone}
                   className=" !shadow-none rounded !bg-transparent border mt-1 p-2 [&>input]:border-none [&>input]:outline-none [&>input]:bg-transparent"
@@ -179,18 +183,18 @@ const Form: React.FC = () => {
             </div>
 
             <div className="flex flex-col">
-              <label className="lg:text-lg font-medium">Location :</label>
-              <input type="text" name="location" placeholder="Location" className="text-sm md:text-[16px] border p-2 mt-1 rounded w-full" />
+              <label className="lg:text-lg font-medium">{t('Form.Location')} :</label>
+              <input type="text" name="location" required placeholder={`${t('Form.Location')} *`} className="text-sm md:text-[16px] border p-2 mt-1 rounded w-full" />
             </div>
 
             <div className="flex gap-2">
-              <label className="lg:text-lg font-medium">Product Interested :</label>
+              <label className="lg:text-lg font-medium">{t('Form.Product')} :</label>
               <input type="text" name="product" defaultValue="AceProject" readOnly className="lg:text-lg font-semibold" />
             </div>
 
             <div className="flex flex-col">
-              <label className="lg:text-lg font-medium">Queries :</label>
-              <textarea name="queries" required placeholder="Queries *" className="text-sm md:text-[16px] border p-2 mt-1 rounded w-full h-24" />
+              <label className="lg:text-lg font-medium">{t('Form.Queries')} :</label>
+              <textarea name="queries" required placeholder={`${t('Form.Queries')} *`}  className="text-sm md:text-[16px] border p-2 mt-1 rounded w-full h-24" />
             </div>
 
             <button
@@ -198,7 +202,7 @@ const Form: React.FC = () => {
               disabled={loading}
               className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-[#006A67] flex items-center gap-2 md:text-lg"
             >
-              {loading ? "Sending..." : "Send"}
+               {loading ? t('Form.Submitting') : t('Form.Submit')}
               <SendHorizontal className="w-4 h-4" />
             </button>
           </form>
@@ -210,7 +214,7 @@ const Form: React.FC = () => {
               <Image fill src={icon} alt="bg" className="object-cover object-center opacity-50" />
               <div className="z-40 text-center">
                 <h1 className="text-[#2b2d42] font-bold">AceProject</h1>
-                <h3 className="text-2xl font-bold text-[#2b2d42]">Contact Information</h3>
+                <h3 className="text-2xl font-bold text-[#2b2d42]">{t('ContactInfo.Title')}</h3>
               </div>
             </div>
           </div>
@@ -221,7 +225,7 @@ const Form: React.FC = () => {
                 <Mails className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
               <div>
-                <h4 className="font-semibold text-lg">Email Us</h4>
+                <h4 className="font-semibold text-lg">{t('ContactInfo.EmailUs')}</h4>
                 <p className="mt-1 text-sm">sales@acesoft.in</p>
               </div>
             </div>
@@ -231,9 +235,9 @@ const Form: React.FC = () => {
                 <PhoneCall className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
               <div>
-                <h4 className="font-semibold text-lg">Call Us</h4>
+                <h4 className="font-semibold text-lg">{t('ContactInfo.CallUs')}</h4>
                 <p className="mt-1 text-sm">+91 9840137210</p>
-                <p className="opacity-90 text-sm">Mon-Sat from 10am to 6:30pm</p>
+                <p className="opacity-90 text-sm">{t('ContactInfo.Hours')}</p>
               </div>
             </div>
 
@@ -242,10 +246,9 @@ const Form: React.FC = () => {
                 <MapPinned className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
               <div>
-                <h4 className="font-semibold text-lg">Visit Us</h4>
+                <h4 className="font-semibold text-lg">{t('ContactInfo.VisitUs')}</h4>
                 <p className="mt-1 text-sm">
-                  #306, 2nd Floor NSIC - Software Technology Business Park<br />
-                  B 24, Guindy Industrial Estate, Ekkatuthangal, Chennai - 600032
+                 {t('ContactInfo.Address')}
                 </p>
               </div>
             </div>

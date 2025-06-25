@@ -10,10 +10,14 @@ import {
   X,
   Calendar,
   Users,
+  LayoutList 
 } from "lucide-react";
 import Image from "next/image";
 import logo from "../assets/AceLogo.png";
+import { useTranslations } from "next-intl";
+
 const Navbar: FC = () => {
+  const t = useTranslations('Navbar')
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -55,7 +59,7 @@ const Navbar: FC = () => {
             className="flex items-center text-[#2b2d42]  border border-white  text-base font-semibold relative px-4 py-2 rounded-full transition-all duration-300 ease-in-out hover:border hover:border-[#2b2d42]  hover:scale-105"
           >
             <Star className="w-4 h-4 mr-2" />
-            Features
+            {t('Features')}
           </Link>
 
           <Link
@@ -63,7 +67,7 @@ const Navbar: FC = () => {
             className="flex items-center text-[#2b2d42]  border border-white   text-base font-semibold relative px-4 py-2 rounded-full transition-all duration-300 ease-in-out hover:border hover:border-[#2b2d42]  hover:scale-105"
           >
             <DollarSign className="w-4 h-4 mr-2" />
-            Pricing
+            {t('Pricing')}
           </Link>
 
           <Link
@@ -71,7 +75,7 @@ const Navbar: FC = () => {
             className="flex items-center text-[#2b2d42] border border-white  text-base font-semibold relative px-4 py-2 rounded-full transition-all duration-300 ease-in-out hover:border hover:border-[#2b2d42]  hover:scale-105"
           >
             <FileText className="w-4 h-4 mr-2" />
-            Book A Demo
+            {t('BookDemo')}
           </Link>
 
           <Link
@@ -79,7 +83,7 @@ const Navbar: FC = () => {
             className="md:hidden lg:flex items-center text-[#2b2d42]  border border-white   text-base font-semibold relative px-4 py-2 rounded-full transition-all duration-300 ease-in-out hover:border hover:border-[#2b2d42] hover:scale-105"
           >
             <Users className="w-4 h-4 mr-2" />
-            Clients
+            {t('Clients')}
           </Link>
         </div>
 
@@ -92,7 +96,7 @@ const Navbar: FC = () => {
                 className="flex items-center text-gray-800 hover:text-orange-600 text-base font-semibold"
               >
                 <House className="w-4 h-4 mr-2" />
-                Home
+                {t('Home')}
               </Link>
               <Link
                 href="#features"
@@ -100,7 +104,7 @@ const Navbar: FC = () => {
                 className="flex items-center text-gray-800 hover:text-orange-600 text-base font-semibold"
               >
                 <Star className="w-4 h-4 mr-2" />
-                Feature
+                {t('Features')}
               </Link>
 
               <Link
@@ -109,7 +113,7 @@ const Navbar: FC = () => {
                 className="flex items-center text-gray-800 hover:text-orange-600 text-base font-semibold"
               >
                 <DollarSign className="w-4 h-4 mr-2" />
-                Pricing
+                {t('Pricing')}
               </Link>
 
               <Link
@@ -118,7 +122,7 @@ const Navbar: FC = () => {
                 className="flex items-center text-gray-800 hover:text-orange-600 text-base font-semibold"
               >
                 <FileText className="w-4 h-4 mr-2" />
-                Contact Us
+                {t('Contact')}
               </Link>
 
               <Link
@@ -127,7 +131,16 @@ const Navbar: FC = () => {
                 className="flex items-center text-gray-800 hover:text-orange-600 text-base font-semibold"
               >
                 <Users className="w-4 h-4 mr-2" />
-                Clients
+                {t('Clients')}
+              </Link>
+
+                <Link
+                href="https://acesoft.in/products"
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center text-gray-800 hover:text-orange-600 text-base font-semibold"
+              >
+                <LayoutList  className="w-4 h-4 mr-2" />
+                {t('AllProducts')}
               </Link>
             </div>
           </div>
@@ -138,7 +151,7 @@ const Navbar: FC = () => {
             href="#"
             className="border  hover:underline hover:text-blue-700 hover:bg-white text-[#2b2d42] px-3 py-1 md:px-2 lg:px-6 xl:py-2 rounded-md font-medium  transition"
           >
-            Sign In
+            {t('SignIn')}
           </Link>
         </div>
       </nav>
@@ -158,7 +171,7 @@ const Navbar: FC = () => {
           className="flex flex-col items-center justify-center text-white w-full"
         >
           <span className="w-full h-12  bg-gradient-to-r from-red-500 to-red-400 flex items-center justify-center">
-            Sign In
+            {t('SignIn')}
           </span>
         </Link>
 

@@ -12,17 +12,19 @@ import Why_Choose from '@/components/Why_Choose'
 import Advantages from '@/components/Advantages'
 import BookADemo from '@/components/BookADemo'
 import NotificationButton from '@/components/NotificationButton'
+import Navbar1 from '@/components/Navbar1'
 
 const Home = () => {
   return (
     <div>
+     <div className='container mx-auto'><Navbar1/> </div>
     <div className='container mx-auto absolute md:hidden'><Navbar/></div>
     <Hero/>
     <Why_Choose/>
-    <BookADemo/>
     <Advantages/>
     <Clients/>
     <Features/>
+    <BookADemo/>
     <PricingTable/>
     <Testimonial/>
     <Form/>

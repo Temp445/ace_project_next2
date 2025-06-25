@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Urbanist } from "next/font/google";
-import "./globals.css";
+import {NextIntlClientProvider, hasLocale} from 'next-intl';
+import {notFound} from 'next/navigation';
+import {routing} from '@/i18n/routing';
+import "../globals.css";
 import 'swiper/css';
 
 const geistSans = Geist({
@@ -24,20 +27,28 @@ export const metadata: Metadata = {
   keywords:" Ace, AceProject, project management, project management software, enterprise project management, task management, team collaboration, Gantt charts, performance tracking, project dashboards, project tracking software, organizational workflow, project planning tools, real-time project monitoring, team management software, enterprise collaboration tools, project reporting, project portfolio management, resource management, project scheduling, milestone tracking, deadline management, workflow automation, team productivity tools, project status tracking, project timeline software, collaboration platform, project analytics, task assignment, project management dashboard, team performance metrics, enterprise workflow solutions, project risk management, multi-project management, agile project management tools, project communication software, project management for businesses",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+  params
+}: {
   children: React.ReactNode;
-}>) {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
   return (
-    <html lang="en">
+    <html lang={locale}>
        <head>
       <link rel="icon" href="/AceLogo.png" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${urbanist.variable} antialiased`}
       >
-        {children}
+        <NextIntlClientProvider> {children} </NextIntlClientProvider>
       </body>
     </html>
     

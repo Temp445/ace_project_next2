@@ -2,36 +2,32 @@
 
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
-import icon1 from '../assets/ClientImages/image-15.png'
-import icon2 from '../assets/ClientImages/image-5.png'
-import icon3 from '../assets/ClientImages/image-1.png'
-import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
-const testimonials = [
+
+
+export default function TestimonialCarousel() {
+ 
+  const t = useTranslations('Testimonial')
+
+  const testimonials = [
   {
     id: 1,
-    logo:icon1,
-    name: 'Praveena',
-    company: 'Asahi India Glass Ltd',
-    quote: 'Managing multiple projects used to be overwhelming. With this tool, I can quickly see what’s on track and where we’re falling behind. I especially love the Gantt charts and daily task notifications. It’s like having a personal assistant for my team!',
+    name: t('name1'),
+    quote: t('Quote1'),
   },
   {
     id: 2,
-    logo:icon2,
-    name: 'Arun',
-    company: 'Wonjin Autoparts India Pvt Ltd',
-    quote: 'Our marketing campaigns are now more organized than ever. We can set deadlines, assign tasks, and track everything from one place. The collaboration tools have reduced our internal emails by half and saved so much time!',
+    name: t('name2'),
+    quote: t('Quote2'),
   },
   {
     id: 3,
-    logo:icon3,
-    name: 'Vijaya Prakash',
-    company: 'RANE TRW STEERING SYSTEMS Pvt Ltd',
-    quote: 'Since we started using this platform, our client communication and internal workflow have improved dramatically. I can assign tasks, monitor status, and keep clients updated in real time. It’s reduced confusion and increased our delivery speed.',
+    name: t('name3'),
+    quote: t('Quote3'),
   }
 ];
 
-export default function TestimonialCarousel() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -53,14 +49,14 @@ export default function TestimonialCarousel() {
     return () => clearInterval(interval);
   }, [isHovered]);
 
-  const { name, company, quote, logo } = testimonials[currentTestimonial];
+  const { name, quote } = testimonials[currentTestimonial];
 
   return (
     <div
       className='bg-[#077A7D] py-10 mt-10 px-2 md:px-10'
     >
       <h1 className='text-center text-2xl md:text-3xl font-bold pb-5 text-white'>
-        Authentic Customer Feedback
+        {t('Title')}
       </h1>
 
       <div
@@ -89,10 +85,6 @@ export default function TestimonialCarousel() {
             </p>
             <div>
               <h3 className="text-base md:text-xl font-semibold text-gray-900">{name}</h3>
-             <p className="text-gray-500 text-xs md:text-base items-center gap-3 mx-auto justify-center hidden">
-    <span className="shrink-0 ">
-      <Image src={logo} alt="Logo" width={80} height={80} className="rounded-md object-contain w-12 h-12 md:w-20 md:h-20" />
-    </span> {company} </p>
 
             </div>
           </div>

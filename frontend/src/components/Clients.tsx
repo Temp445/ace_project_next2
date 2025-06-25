@@ -33,8 +33,10 @@ import img26 from "../assets/ClientImages/image-26.png";
 import img27 from "../assets/ClientImages/image-27.png";
 import img28 from "../assets/ClientImages/image-28.png";
 import img29 from "../assets/ClientImages/image-29.png";
+import { useTranslations } from "next-intl";
 
 const Clients: React.FC = () => {
+  const t = useTranslations('Advantages')
   const logos: StaticImageData[] = [
     img0, img1, img2, img3, img4, img5, img6, img7, img8, img9,
     img10, img11, img12, img13, img14, img15, img16, img17, img18,
@@ -49,7 +51,7 @@ const Clients: React.FC = () => {
   return (
     <div className="px-5 z-0 container mx-auto" id="client">
         <h1 className="text-center text-2xl md:text-3xl 2xl:text-4xl font-bold md:mb-8  text-gray-900">
-        Brands That Trust Us
+      {t('ClientsTitle')}
       </h1>
 
       <div className="py-2 md:py-4 bg-gradient-to-bl">

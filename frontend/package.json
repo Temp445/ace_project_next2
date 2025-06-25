@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "flag-icons": "^7.5.0",
     "lucide-react": "^0.509.0",
     "mailcheck": "^1.1.1",
     "mailchecker": "^6.0.17",
     "next": "15.3.2",
+    "next-intl": "^4.1.0",
     "react": "^19.0.0",
     "react-calendly": "^4.4.0",
     "react-dom": "^19.0.0",

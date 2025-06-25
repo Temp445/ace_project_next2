@@ -3,10 +3,10 @@ import { CheckCircle,MoveRight } from 'lucide-react'
 import Image from 'next/image'
 import AP6 from '../assets/img-1.png'
 import Link from 'next/link'
-
+import { useTranslations } from 'next-intl'
 
 const Why_Choose = () => {
- 
+ const t = useTranslations('WhyChoose')
 
   return (
     <section className="pt-1 container mx-auto mt-5 ">
@@ -14,17 +14,15 @@ const Why_Choose = () => {
          <div className="min-h-fit bg-gradient-to-tl from-gray-800 to-gray-800 flex items-center justify-center p-2 md:p-6 container mx-auto">
       <div className="bg-white md:shadow-2xl  rounded md:rounded-2xl p-2 md:p-8  w-full md:border md:border-gray-200">
         <h1 className="text-xl md:text-3xl font-bold text-[#2b2d42] mb-4">
-          What is <span className="text-[#077A7D]">Project Management</span> ?
+          {t('Title')} <span className="text-[#077A7D]">Project Management</span> ?
         </h1>
         <p className="text-[#31363F] md:text-lg leading-relaxed">
-          Project management is the process of planning, organizing, and overseeing tasks to achieve specific goals within a defined timeline and budget. It involves managing resources, coordinating team members, setting deadlines, and tracking progress to ensure successful project delivery.
+          {t('Desc')}
         </p>
       </div>
   <div>
   </div>    
   </div>
-
-
 
       <div className=" mx-auto px-2 md:px-4 mt-10">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-0 xl:gap-16 container">
@@ -49,25 +47,25 @@ const Why_Choose = () => {
         
           <div className="w-full xl:w-7/12 space-y-6  pt-5 pb-10 px-2 lg:px-12 xl:px-2 rounded">
             <div className="inline-block  text-[#2b2d42] border px-4 py-1 rounded-full font-medium">
-              Why AceProject ?
+              {t('Tagline')} AceProject ?
             </div>
             
             <h2 className="text-xl  xl:text-2xl  2xl:text-4xl font-bold text-[#2b2d42] leading-tight">
-             Your team&rsquo;s success begins with AceProject
+             {t('MainHeading')}
             </h2>
             
             <p className="text-sm lg:text-lg text-[#31363F]">
-              AceProject is more than just a project management tool—it&rsquo;s a complete solution to help your team stay organized, productive, and on schedule.
+             {t('Subheading')}
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
               {[
-                "Secure Role-Based Access",
-                "Perfect for Agencies, Startups, and Enterprises",
-                "Seamless Task Management & Collaboration",
-                "Calendar, Dashboard, and Gantt Integration in One Platform",
-                " Boost Team Performance with Star Player Recognition",
-                "Insightful Reports & Exportable Analytics"
+                t('P0'),
+                t('P1'),
+                t('P2'),
+                t('P3'),
+                t('P4'),
+                t('P5'),
               ].map((item, index) => (
                 <div 
                   key={index} 
@@ -81,7 +79,7 @@ const Why_Choose = () => {
             
         <div className='w-[130px] md:w-36'>
               <Link href="#features" className=" text-sm  mt-6 bg-[#077A7D] text-white font-medium py-2 px-2 gap-3 md:py-2 md:px-3 rounded shadow-md transition-colors duration-300  flex items-center md:gap-5">
-              Learn More
+              {t('LearnMore')}
                <MoveRight size={20}/>
             </Link>
         </div>

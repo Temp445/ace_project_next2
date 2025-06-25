@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { FaCalendarDays } from "react-icons/fa6";
-
+import { useTranslations } from 'next-intl';
 const NotificationButton = () => {
+  const t = useTranslations('Notification')
   const [shouldShow, setShouldShow] = useState(false);
   const [isClosed, setIsClosed] = useState(false);
 
@@ -43,12 +44,12 @@ const NotificationButton = () => {
 
   return (
     <div className="fixed top-[50%] right-0 z-[200]">
-      <div className="group flex items-center bg-orange-600 text-white py-2 px-2 rounded-l-lg shadow-lg space-x-2 relative">
+      <div className="group flex items-center bg-gradient-to-tr from-sky-500 to-sky-600 text-white py-2 px-2 rounded-l-lg shadow-lg space-x-2 relative">
         <Link
           href="#contact"
-          className="bg-white text-black rounded px-3 py-1 text-sm font-semibold flex items-center gap-1"
+          className="bg-white text-black rounded  px-3 py-1 text-sm font-semibold flex items-center gap-1"
         >
-          BOOK A DEMO <FaCalendarDays className="animate-bounce" />
+          {t('button')} <FaCalendarDays className="animate-bounce" />
         </Link>
         <button
           onClick={handleClose}
@@ -58,8 +59,8 @@ const NotificationButton = () => {
           <AiOutlineCloseCircle />
         </button>
 
-        <div className="hidden group-hover:block absolute top-full right-5 -mt-32 w-72 bg-white border shadow-2xl text-black text-xs p-2 rounded">
-          Take a quick tour of AceProject and discover how it can simplify your project management. Click below to book a demo now.
+        <div className="hidden group-hover:block absolute  right-5 -top-20 w-72 bg-white border shadow-2xl text-black text-xs p-2 rounded">
+          {t('Description')}
         </div>
       </div>
     </div>

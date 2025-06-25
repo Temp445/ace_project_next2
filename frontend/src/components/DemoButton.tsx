@@ -2,8 +2,10 @@
 
 import React, { useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { useTranslations } from "next-intl";
 
 export default function DemoButton() {
+  const t = useTranslations('Hero')
   const [showVideoOverlay, setShowVideoOverlay] = useState(false);
 
   const handleDemoClick = () => {
@@ -28,7 +30,7 @@ export default function DemoButton() {
           className="flex items-center justify-center gap-2 px-6 py-2 md:py-2 2xl:py-3 bg-[#077A7D] text-white rounded hover:scale-105 transition-transform shadow-lg"
           aria-label="Watch demo video"
         >
-          <span className="md:text-lg xl:text-md font-semibold">Watch Demo</span>
+          <span className="md:text-lg xl:text-md font-semibold">{t('Buttons.Demo')}</span>
         </button>
 
         {showVideoOverlay && (
